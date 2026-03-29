@@ -1,3 +1,10 @@
+CREATE DATABASE OrdersDB;
+GO
+    
+USE OrdersDB;
+GO
+
+
 CREATE TABLE Staging_Orders (
     id INT,
     order_date DATE,
