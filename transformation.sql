@@ -1,15 +1,16 @@
 
--- Extended Description:
--- This script performs data cleaning and transformation directly on the Orders table.
--- It ensures proper data types, removes invalid records, and prepares the dataset for reporting and analysis.
+/*
+Extended Description:
+This script transforms raw data from the staging table into clean, structured data
+and loads it into the production Orders table.
+*/
 
--- Remove rows with NULL sales
-DELETE FROM Orders
-WHERE sales IS NULL;
-
--- Optional: standardize ship_mode values (example)
-UPDATE Orders
-SET ship_mode = UPPER(ship_mode);
-
--- Verify cleaned data
-SELECT * FROM Orders;
+INSERT INTO Orders (id, order_date, ship_mode, customer_id, sales)
+SELECT 
+    id,
+    TRY_CAST(order_date AS DATE),
+    UPPER(ship_mode),
+    customer_id,
+    TRY_CAST(sales AS DECIMAL(10,2))
+FROM Staging_Orders
+WHERE TRY_CAST(sales AS DECIMAL(10,2)) IS NOT NULL;
