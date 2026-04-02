@@ -48,3 +48,4 @@ FROM dbo.Orders_Staging;
 
 -- Step 5: Validate Load
 SELECT COUNT(*) AS Total_Records FROM dbo.Orders;
+----==========Mekonnen Senbeta April 2026======================
